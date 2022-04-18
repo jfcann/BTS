@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
 ```
 
 # The general NDLM form
@@ -51,10 +52,6 @@ $$f_t(h) = F'G^h \mathbb{E}(\theta_t| D_t)$$
 # Polynomial trend model
 
 + First-order polynomial model: this has the form
-
-
-
-
 + Second-order polynomial model
 + $p$-th order polynomial model
 
@@ -70,6 +67,45 @@ $y_t = \beta_{t, 0} + \beta_{t, 1} X_{t, 1} + \ldots + \beta_{t, p} X_{t, p} + \
 $G = 2$
 $F = 3$
 $f_t(h) = 4$
+
+
+# The superposition principle
+
++ Constructing models with particular forecast components.
+
+e.g. $f_t(h) = \kappa_{t,0} + \kappa_{t,1} h + \kappa_{t,2} x_{t+h}$ can be broken into the two components:
+$f_{1t} = \kappa_{t,0} + \kappa_{t,1} h$
+$f_{2t} = \kappa_{t,2} x_{t+h}$
+each of which we know how to model separately. We can then add block components to the matrices $F$ and $G$ that model these components.
+
+The same thing can be done in the general case, i.e. with a timeseries process $y_t$ that has forecast
+function $f_t(h) = \sum_{i = 1}^m f_{i, t}(h)$ where each $f_{i,t}$ has specification $\lbrace F_{it}, G_{it}, v_t, W_t \rbrace$.
+
+
+# Bayesian inference in the NDLM
+
+Work with a conjugate prior and assume:
+$(\theta_0 | D_0) \sim N(m_0, C_0)$
+
+Assume that: $(\theta_{t-1} | D_{t-1}) \sim N(m_{t-1}, C_{t-1})$.
+
+
+```{r}
+df <- LakeHuron %>%
+  data.frame(y = .) %>%
+  mutate(t = 1:nrow(.))
+
+df %>%
+  ggplot(aes(x=t, y=y)) +
+    geom_line() + 
+    theme_bw()
+
+```
+
+
+
+
+
 
 
 
