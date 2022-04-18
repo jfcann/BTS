@@ -1,0 +1,88 @@
+---
+title: "Normal Dynamic Linear Models"
+author: "jagofc"
+date: "18/04/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# The general NDLM form
+
+The class of Normal Dynamic Linear Models can be written as a pair of equations, the:
+
+**observation equation:**  
+$y_t = F_t' \theta_t + \nu_t$ with $\nu_t \sim N(0, v_t)$
+
+**evolution equation (/system eq.):**  
+$\theta_t = G_t \theta_{t-1} + \omega_t$ with $\omega_t \sim N(0, W_t)$.
+
+Here:
+
++ $F_t$ is vector of dim $k$, assumed known
++ $G_t$ is $k$-by-$k$ matrix, assumed known
++ $v_t$ is the variance at the obs level, assumed known.
++ $W_t$ is the $k$-by-$k$ covariance matrix at the sys level, assumed known.
++ $\theta_t$ is a vector of dimension $k$ of parameters, to find.
++ $\theta_0 \sim N(m_0, c_0)$, assumed known.
+
+
+The short-hand notation for this model is $\lbrace F_t, G_t, v_t, W_t \rbrace$.  
+*Note: this ignores the prior on $\theta_0$*. 
+
+We're interested in: 
+
++ filtering: $p(\theta_t | D_t)$
++ forecasting: $p(y_{t+h} | D_t)$
++ smoothing: $p(y_t | D_T)$ where $t < T$
+
+where $D_t = \lbrace D_0, y_{1:t} \rbrace$ and $D_0$ is the information available at $t=0$.
+
+We're also interested in point forecasts as well as densities. The forecast function is:
+
+$$f_t(h) = \mathbb{E}(y_{t+h} | D_t) = F_{t+h}' G_{t+h} \cdots G_{t+1} \mathbb{E}(\theta_t | D_t)$$
+and if $F_t = F$ and $G_t = G$ then we have:
+
+$$f_t(h) = F'G^h \mathbb{E}(\theta_t| D_t)$$
+
+
+# Polynomial trend model
+
++ First-order polynomial model: this has the form
+
+
+
+
++ Second-order polynomial model
++ $p$-th order polynomial model
+
+
+# Regression models
+
+$y_t = \beta_{t, 0} + \beta_{t, 1} X_t + \epsilon_t$ where $\epsilon_t \sim N(0, \nu_t)$
+
+## General form
+
+$y_t = \beta_{t, 0} + \beta_{t, 1} X_{t, 1} + \ldots + \beta_{t, p} X_{t, p} + \varepsilon_t$
+
+$G = 2$
+$F = 3$
+$f_t(h) = 4$
+
+
+
+
+
+```{r cars}
+#summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
