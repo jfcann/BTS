@@ -111,8 +111,23 @@ df %>%
 
 
 
-```{r cars}
-#summary(cars)
+```{r}
+
+library(plotly)
+F <- matrix(c(1, 0), nrow=2)
+G <- matrix(c(1, -0.75, -0.75, 1), nrow=2)
+E_t <- matrix(c(1, 0.5), nrow=2)
+
+f_t <- function(h) t(F) %*% G**h %*% E_t
+
+
+(
+sapply(1:10, f_t) %>%
+  data.frame(h=1:10, y=.) %>%
+  ggplot(aes(x=h, y=y)) +
+    geom_line() +
+    theme_bw()
+) %>% ggplotly()
 ```
 
 ## Including Plots
