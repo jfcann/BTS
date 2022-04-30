@@ -19,3 +19,9 @@ events that might cause the modelling to diverge significantly from reality.
 Two files are of particular interest:
   + `projects/gtrends_project.Rmd`: *The R Markdown version of the project.*
   + `projects/gtrends_project.pdf`: *A pdf version of the output!*
+
+
+
+A summary plot of the model's filtering and (12-month) prediction distributions:
+
+![image](https://user-images.githubusercontent.com/57755717/166098845-3e299a27-3728-46fd-b817-c0605487d60c.png)
